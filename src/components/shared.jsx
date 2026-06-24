@@ -1,4 +1,6 @@
 import React from 'react';
+import { useUsers } from '@/hooks/useUsers';
+import { format } from 'date-fns';
 
 export function StatusBadge({ status }) {
   const colorMap = {
@@ -126,6 +128,32 @@ export function LoadingState() {
   return (
     <div className="flex items-center justify-center !py-16">
       <div className="w-6 h-6 border-2 border-[#1E1E26] border-t-[#00F0FF] rounded-full animate-spin" />
+    </div>
+  );
+}
+
+export function AuditTrail({ record }) {
+  const { users } = useUsers();
+
+  if (!record || !record.id) return null;
+
+  const creator = users.find(u => u.id === record.created_by_id);
+  const createdName = creator?.full_name || creator?.email || 'Unknown user';
+  const createdDate = record.created_date ? format(new Date(record.created_date), 'MMM d, yyyy · h:mm a') : null;
+  const updatedDate = record.updated_date ? format(new Date(record.updated_date), 'MMM d, yyyy · h:mm a') : null;
+  const wasEdited =
+    record.updated_date &&
+    record.created_date &&
+    new Date(record.updated_date).getTime() !== new Date(record.created_date).getTime();
+
+  if (!createdDate) return null;
+
+  return (
+    <div className="text-[10px] text-[#A0A0A0] border-t border-[#1E1E26] pt-3 mt-3 space-y-0.5">
+      <p>
+        Added by <span className="text-[#00F0FF] font-medium">{createdName}</span> on {createdDate}
+      </p>
+      {wasEdited && updatedDate && <p>Last edited on {updatedDate}</p>}
     </div>
   );
 }

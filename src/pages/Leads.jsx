@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { StatusBadge, PriorityBadge, PageHeader, LoadingState, EmptyState } from '@/components/shared';
+import { StatusBadge, PriorityBadge, PageHeader, LoadingState, EmptyState, AuditTrail } from '@/components/shared';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -270,6 +270,7 @@ function LeadDialog({ open, onClose, editing, onSaved }) {
           <div className="sm:col-span-2"><Label className="text-[#A0A0A0] text-xs">Services Needed</Label><Input value={form.services_needed || ''} onChange={e => set('services_needed', e.target.value)} placeholder="New website, SEO, maintenance..." className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
           <div className="sm:col-span-2"><Label className="text-[#A0A0A0] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={3} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none" /></div>
         </div>
+        {editing && <AuditTrail record={editing} />}
         <DialogFooter>
           <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0]">Cancel</Button>
           <Button onClick={handleSave} disabled={saving || !form.company_name} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white">{saving ? 'Saving...' : 'Save Lead'}</Button>

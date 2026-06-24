@@ -61,7 +61,7 @@ export default function Dashboard() {
       {/* Welcome section */}
       <div className="mb-6">
         <p className="text-xs text-[#00F0FF] font-medium uppercase tracking-wider mb-1">{format(today, 'EEEE, MMMM d, yyyy')}</p>
-        <h1 className="text-2xl font-bold text-white">Command Center</h1>
+        <h1 className="text-2xl font-bold text-white">Hub</h1>
         <p className="text-sm text-[#A0A0A0] mt-1">
           {todayFollowUps.length} follow-ups today • {paymentsDueThisWeek.length} payments due this week • ${mrr.toLocaleString()}/mo MRR
         </p>

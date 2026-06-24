@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { StatusBadge, PageHeader, LoadingState, EmptyState, MetricCard } from '@/components/shared';
+import { StatusBadge, PageHeader, LoadingState, EmptyState, MetricCard, AuditTrail } from '@/components/shared';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -191,6 +191,7 @@ function PaymentDialog({ open, onClose, editing, customers, onSaved }) {
           </div>
           <div><Label className="text-[#A0A0A0] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none" /></div>
         </div>
+        {editing && <AuditTrail record={editing} />}
         <DialogFooter>
           <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0]">Cancel</Button>
           <Button onClick={handleSave} disabled={saving || !form.customer_id} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white">{saving ? 'Saving...' : 'Save'}</Button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { StatusBadge, PriorityBadge, PageHeader, LoadingState, EmptyState } from '@/components/shared';
+import { StatusBadge, PriorityBadge, PageHeader, LoadingState, EmptyState, AuditTrail } from '@/components/shared';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -201,6 +201,7 @@ function TaskDialog({ open, onClose, editing, customers, projects, onSaved }) {
           </div>
           <div><Label className="text-[#8B949E] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3] resize-none" /></div>
         </div>
+        {editing && <AuditTrail record={editing} />}
         <DialogFooter>
           <Button variant="ghost" onClick={onClose} className="text-[#8B949E]">Cancel</Button>
           <Button onClick={handleSave} disabled={saving || !form.title} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white">{saving ? 'Saving...' : 'Save'}</Button>
