@@ -59,56 +59,56 @@ export default function FileUploadDialog({ open, onClose, onUploaded, customerId
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#161B22] border-[#30363D] text-[#E6EDF3] max-w-md">
+      <DialogContent className="bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-[#E6EDF3]">Upload File</DialogTitle>
+          <DialogTitle className="text-[#FFFFFF]">Upload File</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <Label className="text-[#8B949E] text-xs">File</Label>
+            <Label className="text-[#A0A0A0] text-xs">File</Label>
             <div className="mt-1.5">
-              <label className="flex flex-col items-center justify-center gap-2 px-4 py-6 border border-dashed border-[#30363D] rounded-lg cursor-pointer hover:border-[#7C3AED] transition-colors">
-                <Upload className="w-5 h-5 text-[#8B949E]" />
-                <span className="text-xs text-[#8B949E]">{file ? file.name : 'Click to select file'}</span>
+              <label className="flex flex-col items-center justify-center gap-2 px-4 py-6 border border-dashed border-[#1E1E26] rounded-lg cursor-pointer hover:border-[#00F0FF] transition-colors">
+                <Upload className="w-5 h-5 text-[#A0A0A0]" />
+                <span className="text-xs text-[#A0A0A0]">{file ? file.name : 'Click to select file'}</span>
                 <input type="file" className="hidden" onChange={handleFileSelect} />
               </label>
             </div>
           </div>
           <div>
-            <Label className="text-[#8B949E] text-xs">File Name</Label>
+            <Label className="text-[#A0A0A0] text-xs">File Name</Label>
             <Input
               value={fileName}
               onChange={(e) => setFileName(e.target.value)}
-              className="mt-1.5 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"
+              className="mt-1.5 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"
             />
           </div>
           <div>
-            <Label className="text-[#8B949E] text-xs">Category</Label>
+            <Label className="text-[#A0A0A0] text-xs">Category</Label>
             <Select value={fileCategory} onValueChange={setFileCategory}>
-              <SelectTrigger className="mt-1.5 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]">
+              <SelectTrigger className="mt-1.5 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">
-                {categories.map(c => <SelectItem key={c} value={c} className="text-[#E6EDF3] focus:bg-[#21262D]">{c}</SelectItem>)}
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">
+                {categories.map(c => <SelectItem key={c} value={c} className="text-[#FFFFFF] focus:bg-[#161620]">{c}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
           <div>
-            <Label className="text-[#8B949E] text-xs">Notes</Label>
+            <Label className="text-[#A0A0A0] text-xs">Notes</Label>
             <Textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="mt-1.5 bg-[#0D1117] border-[#30363D] text-[#E6EDF3] resize-none"
+              className="mt-1.5 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none"
               rows={2}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={onClose} className="text-[#8B949E] hover:text-[#E6EDF3]">Cancel</Button>
+          <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0] hover:text-[#FFFFFF]">Cancel</Button>
           <Button
             onClick={handleUpload}
             disabled={!file || uploading}
-            className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"
+            className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white"
           >
             {uploading ? 'Uploading...' : 'Upload'}
           </Button>

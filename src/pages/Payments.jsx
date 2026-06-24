@@ -60,7 +60,7 @@ export default function Payments() {
       <PageHeader
         title="Payments"
         subtitle="Monthly revenue tracking"
-        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Payment</Button>}
+        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Payment</Button>}
       />
 
       {/* Revenue metrics */}
@@ -74,7 +74,7 @@ export default function Payments() {
       </div>
 
       {/* View tabs */}
-      <div className="flex gap-1 mb-4 bg-[#161B22] border border-[#30363D] rounded-lg p-1 w-fit">
+      <div className="flex gap-1 mb-4 bg-[#0D0D12] border border-[#1E1E26] rounded-lg p-1 w-fit">
         {[
           { key: 'week', label: 'Due This Week' },
           { key: 'month', label: 'Due This Month' },
@@ -82,40 +82,40 @@ export default function Payments() {
           { key: 'canceled', label: 'Canceled' },
           { key: 'all', label: 'All' },
         ].map(v => (
-          <button key={v.key} onClick={() => setView(v.key)} className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${view === v.key ? 'bg-[#7C3AED] text-white' : 'text-[#8B949E] hover:text-[#E6EDF3]'}`}>{v.label}</button>
+          <button key={v.key} onClick={() => setView(v.key)} className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${view === v.key ? 'bg-[#00F0FF] text-white' : 'text-[#A0A0A0] hover:text-[#FFFFFF]'}`}>{v.label}</button>
         ))}
       </div>
 
       {filtered.length === 0 ? (
         <EmptyState icon={DollarSign} title="No payments in this view" />
       ) : (
-        <div className="bg-[#161B22] border border-[#30363D] rounded-xl overflow-hidden">
+        <div className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[#30363D]">
-                <th className="text-left text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Customer</th>
-                <th className="text-left text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Type</th>
-                <th className="text-right text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Amount</th>
-                <th className="text-left text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Due Date</th>
-                <th className="text-left text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Status</th>
-                <th className="text-right text-[10px] font-semibold text-[#8B949E] uppercase tracking-wide px-4 py-2.5">Actions</th>
+              <tr className="border-b border-[#1E1E26]">
+                <th className="text-left text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Customer</th>
+                <th className="text-left text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Type</th>
+                <th className="text-right text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Amount</th>
+                <th className="text-left text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Due Date</th>
+                <th className="text-left text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Status</th>
+                <th className="text-right text-[10px] font-semibold text-[#A0A0A0] uppercase tracking-wide px-4 py-2.5">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(pay => (
-                <tr key={pay.id} className="border-b border-[#30363D] hover:bg-[#21262D]/50">
-                  <td className="px-4 py-3 text-sm text-[#E6EDF3]">{pay.customer_name || '—'}</td>
-                  <td className="px-4 py-3 text-xs text-[#8B949E]">{pay.payment_type}</td>
-                  <td className="px-4 py-3 text-sm text-[#E6EDF3] font-semibold text-right">${(pay.amount || 0).toLocaleString()}</td>
-                  <td className="px-4 py-3 text-xs text-[#8B949E]">{pay.due_date ? format(new Date(pay.due_date), 'MMM d, yyyy') : '—'}</td>
+                <tr key={pay.id} className="border-b border-[#1E1E26] hover:bg-[#161620]/50">
+                  <td className="px-4 py-3 text-sm text-[#FFFFFF]">{pay.customer_name || '—'}</td>
+                  <td className="px-4 py-3 text-xs text-[#A0A0A0]">{pay.payment_type}</td>
+                  <td className="px-4 py-3 text-sm text-[#FFFFFF] font-semibold text-right">${(pay.amount || 0).toLocaleString()}</td>
+                  <td className="px-4 py-3 text-xs text-[#A0A0A0]">{pay.due_date ? format(new Date(pay.due_date), 'MMM d, yyyy') : '—'}</td>
                   <td className="px-4 py-3"><StatusBadge status={pay.status} /></td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1">
                       {pay.status !== 'Paid' && pay.status !== 'Canceled' && (
                         <button onClick={() => markPaid(pay)} className="h-7 px-2 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 text-xs font-medium flex items-center gap-1"><Check className="w-3 h-3" /> Paid</button>
                       )}
-                      <button onClick={() => { setEditing(pay); setDialogOpen(true); }} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#8B949E]" /></button>
-                      <button onClick={async () => { await base44.entities.Payment.delete(pay.id); load(); }} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#8B949E] hover:text-red-400" /></button>
+                      <button onClick={() => { setEditing(pay); setDialogOpen(true); }} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#A0A0A0]" /></button>
+                      <button onClick={async () => { await base44.entities.Payment.delete(pay.id); load(); }} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#A0A0A0] hover:text-red-400" /></button>
                     </div>
                   </td>
                 </tr>
@@ -158,42 +158,42 @@ function PaymentDialog({ open, onClose, editing, customers, onSaved }) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#161B22] border-[#30363D] text-[#E6EDF3] max-w-lg">
-        <DialogHeader><DialogTitle className="text-[#E6EDF3]">{editing ? 'Edit Payment' : 'Add Payment'}</DialogTitle></DialogHeader>
+      <DialogContent className="bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] max-w-lg">
+        <DialogHeader><DialogTitle className="text-[#FFFFFF]">{editing ? 'Edit Payment' : 'Add Payment'}</DialogTitle></DialogHeader>
         <div className="space-y-3">
-          <div><Label className="text-[#8B949E] text-xs">Customer</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Customer</Label>
             <Select value={form.customer_id || ''} onValueChange={onCustomerChange}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Select customer" /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{c.business_name}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Select customer" /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#FFFFFF] focus:bg-[#161620]">{c.business_name}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label className="text-[#8B949E] text-xs">Amount</Label><Input type="number" value={form.amount || ''} onChange={e => set('amount', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-            <div><Label className="text-[#8B949E] text-xs">Payment Type</Label>
+            <div><Label className="text-[#A0A0A0] text-xs">Amount</Label><Input type="number" value={form.amount || ''} onChange={e => set('amount', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">Payment Type</Label>
               <Select value={form.payment_type || 'Monthly hosting'} onValueChange={v => set('payment_type', v)}>
-                <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{TYPES.map(t => <SelectItem key={t} value={t} className="text-[#E6EDF3] focus:bg-[#21262D]">{t}</SelectItem>)}</SelectContent>
+                <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+                <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{TYPES.map(t => <SelectItem key={t} value={t} className="text-[#FFFFFF] focus:bg-[#161620]">{t}</SelectItem>)}</SelectContent>
               </Select>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label className="text-[#8B949E] text-xs">Due Date</Label><Input type="date" value={form.due_date || ''} onChange={e => set('due_date', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-            <div><Label className="text-[#8B949E] text-xs">Paid Date</Label><Input type="date" value={form.paid_date || ''} onChange={e => set('paid_date', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">Due Date</Label><Input type="date" value={form.due_date || ''} onChange={e => set('due_date', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">Paid Date</Label><Input type="date" value={form.paid_date || ''} onChange={e => set('paid_date', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label className="text-[#8B949E] text-xs">Status</Label>
+            <div><Label className="text-[#A0A0A0] text-xs">Status</Label>
               <Select value={form.status || 'Due soon'} onValueChange={v => set('status', v)}>
-                <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#E6EDF3] focus:bg-[#21262D]">{s}</SelectItem>)}</SelectContent>
+                <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+                <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#FFFFFF] focus:bg-[#161620]">{s}</SelectItem>)}</SelectContent>
               </Select>
             </div>
-            <div><Label className="text-[#8B949E] text-xs">Payment Method</Label><Input value={form.payment_method || ''} onChange={e => set('payment_method', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">Payment Method</Label><Input value={form.payment_method || ''} onChange={e => set('payment_method', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3] resize-none" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none" /></div>
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={onClose} className="text-[#8B949E]">Cancel</Button>
-          <Button onClick={handleSave} disabled={saving || !form.customer_id} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white">{saving ? 'Saving...' : 'Save'}</Button>
+          <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0]">Cancel</Button>
+          <Button onClick={handleSave} disabled={saving || !form.customer_id} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white">{saving ? 'Saving...' : 'Save'}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

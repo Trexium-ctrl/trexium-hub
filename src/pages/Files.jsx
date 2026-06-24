@@ -48,19 +48,19 @@ export default function Files() {
       <PageHeader
         title="Files"
         subtitle={`${filtered.length} files`}
-        action={<Button onClick={() => setUploadOpen(true)} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"><Plus className="w-4 h-4 mr-1.5" />Upload File</Button>}
+        action={<Button onClick={() => setUploadOpen(true)} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white"><Plus className="w-4 h-4 mr-1.5" />Upload File</Button>}
       />
 
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B949E]" />
-          <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search files..." className="pl-9 bg-[#161B22] border-[#30363D] text-[#E6EDF3] placeholder:text-[#484F58]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A0A0A0]" />
+          <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search files..." className="pl-9 bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] placeholder:text-[#3A3A45]" />
         </div>
         <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-          <SelectTrigger className="w-full sm:w-48 bg-[#161B22] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Category" /></SelectTrigger>
-          <SelectContent className="bg-[#161B22] border-[#30363D]">
-            <SelectItem value="all" className="text-[#E6EDF3] focus:bg-[#21262D]">All categories</SelectItem>
-            {CATEGORIES.map(c => <SelectItem key={c} value={c} className="text-[#E6EDF3] focus:bg-[#21262D]">{c}</SelectItem>)}
+          <SelectTrigger className="w-full sm:w-48 bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Category" /></SelectTrigger>
+          <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">
+            <SelectItem value="all" className="text-[#FFFFFF] focus:bg-[#161620]">All categories</SelectItem>
+            {CATEGORIES.map(c => <SelectItem key={c} value={c} className="text-[#FFFFFF] focus:bg-[#161620]">{c}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
@@ -70,19 +70,19 @@ export default function Files() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {filtered.map(f => (
-            <div key={f.id} className="bg-[#161B22] border border-[#30363D] rounded-xl p-4 hover:border-[#484F58] transition-colors">
+            <div key={f.id} className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl p-4 hover:border-[#3A3A45] transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="text-2xl">{CATEGORY_ICONS[f.file_category] || '📎'}</div>
                 <div className="flex gap-1">
-                  {f.file_url && <a href={f.file_url} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center" title="Download"><Download className="w-3 h-3 text-[#8B949E]" /></a>}
-                  <button onClick={async () => { await base44.entities.ClientFile.delete(f.id); load(); }} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-red-500/20 flex items-center justify-center" title="Delete"><Trash2 className="w-3 h-3 text-[#8B949E] hover:text-red-400" /></button>
+                  {f.file_url && <a href={f.file_url} target="_blank" rel="noopener noreferrer" className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center" title="Download"><Download className="w-3 h-3 text-[#A0A0A0]" /></a>}
+                  <button onClick={async () => { await base44.entities.ClientFile.delete(f.id); load(); }} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-red-500/20 flex items-center justify-center" title="Delete"><Trash2 className="w-3 h-3 text-[#A0A0A0] hover:text-red-400" /></button>
                 </div>
               </div>
-              <p className="text-sm font-medium text-[#E6EDF3] truncate">{f.file_name}</p>
-              <p className="text-xs text-[#8B949E] truncate mt-0.5">{f.customer_name || 'Unassigned'}</p>
-              <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#30363D]">
-                <span className="text-[10px] text-[#8B949E] bg-[#21262D] px-1.5 py-0.5 rounded">{f.file_category}</span>
-                <span className="text-[10px] text-[#484F58]">{f.created_date ? format(new Date(f.created_date), 'MMM d') : ''}</span>
+              <p className="text-sm font-medium text-[#FFFFFF] truncate">{f.file_name}</p>
+              <p className="text-xs text-[#A0A0A0] truncate mt-0.5">{f.customer_name || 'Unassigned'}</p>
+              <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#1E1E26]">
+                <span className="text-[10px] text-[#A0A0A0] bg-[#161620] px-1.5 py-0.5 rounded">{f.file_category}</span>
+                <span className="text-[10px] text-[#3A3A45]">{f.created_date ? format(new Date(f.created_date), 'MMM d') : ''}</span>
               </div>
             </div>
           ))}

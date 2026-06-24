@@ -42,19 +42,19 @@ export default function Customers() {
       <PageHeader
         title="Customers"
         subtitle={`${filtered.length} customers • $${mrr.toLocaleString()}/mo MRR`}
-        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Customer</Button>}
+        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Customer</Button>}
       />
 
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B949E]" />
-          <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search business, contact..." className="pl-9 bg-[#161B22] border-[#30363D] text-[#E6EDF3] placeholder:text-[#484F58]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A0A0A0]" />
+          <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search business, contact..." className="pl-9 bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] placeholder:text-[#3A3A45]" />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-44 bg-[#161B22] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Status" /></SelectTrigger>
-          <SelectContent className="bg-[#161B22] border-[#30363D]">
-            <SelectItem value="all" className="text-[#E6EDF3] focus:bg-[#21262D]">All statuses</SelectItem>
-            {STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#E6EDF3] focus:bg-[#21262D]">{s}</SelectItem>)}
+          <SelectTrigger className="w-full sm:w-44 bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Status" /></SelectTrigger>
+          <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">
+            <SelectItem value="all" className="text-[#FFFFFF] focus:bg-[#161620]">All statuses</SelectItem>
+            {STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#FFFFFF] focus:bg-[#161620]">{s}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
@@ -64,37 +64,37 @@ export default function Customers() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {filtered.map(c => (
-            <div key={c.id} className="bg-[#161B22] border border-[#30363D] rounded-xl p-4 hover:border-[#484F58] transition-colors">
+            <div key={c.id} className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl p-4 hover:border-[#3A3A45] transition-colors">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-9 h-9 rounded-lg bg-[#21262D] flex items-center justify-center flex-shrink-0">
-                    <Building2 className="w-4 h-4 text-[#8B949E]" />
+                  <div className="w-9 h-9 rounded-lg bg-[#161620] flex items-center justify-center flex-shrink-0">
+                    <Building2 className="w-4 h-4 text-[#A0A0A0]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-[#E6EDF3] truncate">{c.business_name}</p>
-                    <p className="text-xs text-[#8B949E] truncate">{c.contact_name || 'No contact'}</p>
+                    <p className="text-sm font-semibold text-[#FFFFFF] truncate">{c.business_name}</p>
+                    <p className="text-xs text-[#A0A0A0] truncate">{c.contact_name || 'No contact'}</p>
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => { setEditing(c); setDialogOpen(true); }} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#8B949E]" /></button>
-                  <button onClick={async () => { await base44.entities.Customer.delete(c.id); load(); }} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#8B949E] hover:text-red-400" /></button>
+                  <button onClick={() => { setEditing(c); setDialogOpen(true); }} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#A0A0A0]" /></button>
+                  <button onClick={async () => { await base44.entities.Customer.delete(c.id); load(); }} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#A0A0A0] hover:text-red-400" /></button>
                 </div>
               </div>
               <div className="flex flex-wrap gap-1.5 mb-2">
                 <StatusBadge status={c.status} />
-                {c.assigned_partner && <span className="text-[10px] text-[#8B949E] bg-[#21262D] px-1.5 py-0.5 rounded">{c.assigned_partner}</span>}
+                {c.assigned_partner && <span className="text-[10px] text-[#A0A0A0] bg-[#161620] px-1.5 py-0.5 rounded">{c.assigned_partner}</span>}
               </div>
-              <div className="space-y-1 text-xs text-[#8B949E]">
+              <div className="space-y-1 text-xs text-[#A0A0A0]">
                 {c.phone && <div className="flex items-center gap-1.5"><Phone className="w-3 h-3" /> {c.phone}</div>}
                 {c.email && <div className="flex items-center gap-1.5"><Mail className="w-3 h-3" /> {c.email}</div>}
                 {c.website_url && <div className="flex items-center gap-1.5"><Globe className="w-3 h-3" /> {c.website_url}</div>}
               </div>
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#30363D]">
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#1E1E26]">
                 <div className="flex items-center gap-1 text-xs">
                   <DollarSign className="w-3 h-3 text-green-400" />
-                  <span className="text-[#E6EDF3] font-semibold">{c.monthly_payment_amount ? `$${c.monthly_payment_amount.toLocaleString()}/mo` : '—'}</span>
+                  <span className="text-[#FFFFFF] font-semibold">{c.monthly_payment_amount ? `$${c.monthly_payment_amount.toLocaleString()}/mo` : '—'}</span>
                 </div>
-                {c.payment_due_day && <span className="text-[10px] text-[#8B949E]">Due day {c.payment_due_day}</span>}
+                {c.payment_due_day && <span className="text-[10px] text-[#A0A0A0]">Due day {c.payment_due_day}</span>}
               </div>
             </div>
           ))}
@@ -128,42 +128,42 @@ function CustomerDialog({ open, onClose, editing, onSaved }) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#161B22] border-[#30363D] text-[#E6EDF3] max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle className="text-[#E6EDF3]">{editing ? 'Edit Customer' : 'Add Customer'}</DialogTitle></DialogHeader>
+      <DialogContent className="bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader><DialogTitle className="text-[#FFFFFF]">{editing ? 'Edit Customer' : 'Add Customer'}</DialogTitle></DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div><Label className="text-[#8B949E] text-xs">Business Name *</Label><Input value={form.business_name || ''} onChange={e => set('business_name', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Contact Name</Label><Input value={form.contact_name || ''} onChange={e => set('contact_name', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Phone</Label><Input value={form.phone || ''} onChange={e => set('phone', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Email</Label><Input value={form.email || ''} onChange={e => set('email', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Website URL</Label><Input value={form.website_url || ''} onChange={e => set('website_url', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Domain Provider</Label><Input value={form.domain_provider || ''} onChange={e => set('domain_provider', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Hosting Status</Label><Input value={form.hosting_status || ''} onChange={e => set('hosting_status', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Service Package</Label><Input value={form.service_package || ''} onChange={e => set('service_package', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Monthly Payment Amount</Label><Input type="number" value={form.monthly_payment_amount || ''} onChange={e => set('monthly_payment_amount', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Setup Fee</Label><Input type="number" value={form.setup_fee || ''} onChange={e => set('setup_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Hosting Fee</Label><Input type="number" value={form.hosting_fee || ''} onChange={e => set('hosting_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Maintenance Fee</Label><Input type="number" value={form.maintenance_fee || ''} onChange={e => set('maintenance_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Payment Due Day (1-31)</Label><Input type="number" min="1" max="31" value={form.payment_due_day || ''} onChange={e => set('payment_due_day', parseInt(e.target.value) || 0)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Payment Method</Label><Input value={form.payment_method || ''} onChange={e => set('payment_method', e.target.value)} placeholder="Stripe, Bank transfer..." className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Status</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Business Name *</Label><Input value={form.business_name || ''} onChange={e => set('business_name', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Contact Name</Label><Input value={form.contact_name || ''} onChange={e => set('contact_name', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Phone</Label><Input value={form.phone || ''} onChange={e => set('phone', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Email</Label><Input value={form.email || ''} onChange={e => set('email', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Website URL</Label><Input value={form.website_url || ''} onChange={e => set('website_url', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Domain Provider</Label><Input value={form.domain_provider || ''} onChange={e => set('domain_provider', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Hosting Status</Label><Input value={form.hosting_status || ''} onChange={e => set('hosting_status', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Service Package</Label><Input value={form.service_package || ''} onChange={e => set('service_package', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Monthly Payment Amount</Label><Input type="number" value={form.monthly_payment_amount || ''} onChange={e => set('monthly_payment_amount', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Setup Fee</Label><Input type="number" value={form.setup_fee || ''} onChange={e => set('setup_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Hosting Fee</Label><Input type="number" value={form.hosting_fee || ''} onChange={e => set('hosting_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Maintenance Fee</Label><Input type="number" value={form.maintenance_fee || ''} onChange={e => set('maintenance_fee', parseFloat(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Payment Due Day (1-31)</Label><Input type="number" min="1" max="31" value={form.payment_due_day || ''} onChange={e => set('payment_due_day', parseInt(e.target.value) || 0)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Payment Method</Label><Input value={form.payment_method || ''} onChange={e => set('payment_method', e.target.value)} placeholder="Stripe, Bank transfer..." className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Status</Label>
             <Select value={form.status || 'Active'} onValueChange={v => set('status', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#E6EDF3] focus:bg-[#21262D]">{s}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#FFFFFF] focus:bg-[#161620]">{s}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Assigned Partner</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Assigned Partner</Label>
             <Select value={form.assigned_partner || 'Owner'} onValueChange={v => set('assigned_partner', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]"><SelectItem value="Owner" className="text-[#E6EDF3] focus:bg-[#21262D]">Owner</SelectItem><SelectItem value="Partner" className="text-[#E6EDF3] focus:bg-[#21262D]">Partner</SelectItem></SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]"><SelectItem value="Owner" className="text-[#FFFFFF] focus:bg-[#161620]">Owner</SelectItem><SelectItem value="Partner" className="text-[#FFFFFF] focus:bg-[#161620]">Partner</SelectItem></SelectContent>
             </Select>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Start Date</Label><Input type="date" value={form.start_date || ''} onChange={e => set('start_date', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Renewal Date</Label><Input type="date" value={form.renewal_date || ''} onChange={e => set('renewal_date', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div className="sm:col-span-2"><Label className="text-[#8B949E] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={3} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3] resize-none" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Start Date</Label><Input type="date" value={form.start_date || ''} onChange={e => set('start_date', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Renewal Date</Label><Input type="date" value={form.renewal_date || ''} onChange={e => set('renewal_date', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div className="sm:col-span-2"><Label className="text-[#A0A0A0] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={3} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none" /></div>
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={onClose} className="text-[#8B949E]">Cancel</Button>
-          <Button onClick={handleSave} disabled={saving || !form.business_name} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white">{saving ? 'Saving...' : 'Save'}</Button>
+          <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0]">Cancel</Button>
+          <Button onClick={handleSave} disabled={saving || !form.business_name} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white">{saving ? 'Saving...' : 'Save'}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

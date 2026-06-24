@@ -69,7 +69,7 @@ export default function Tasks() {
         action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Task</Button>}
       />
 
-      <div className="flex gap-1 mb-4 bg-[#161B22] border border-[#30363D] rounded-lg p-1 w-fit overflow-x-auto">
+      <div className="flex gap-1 mb-4 bg-[#0D0D12] border border-[#30363D] rounded-lg p-1 w-fit overflow-x-auto">
         {['all', 'To do', 'In progress', 'Waiting on customer', 'Done', 'overdue'].map(v => (
           <button key={v} onClick={() => setFilter(v)} className={`px-3 py-1.5 text-xs font-medium rounded-md capitalize transition-colors whitespace-nowrap ${filter === v ? 'bg-[#7C3AED] text-white' : 'text-[#8B949E] hover:text-[#E6EDF3]'}`}>{v === 'overdue' ? 'Overdue' : v}</button>
         ))}
@@ -84,7 +84,7 @@ export default function Tasks() {
           {columns.map(col => {
             const colTasks = filtered.filter(t => t.status === col.key);
             return (
-              <div key={col.key} className={`bg-[#161B22] border-t-2 ${col.color} border-x border-b border-[#30363D] rounded-xl p-3`}>
+              <div key={col.key} className={`bg-[#0D0D12] border-t-2 ${col.color} border-x border-b border-[#30363D] rounded-xl p-3`}>
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-xs font-semibold text-[#E6EDF3]">{col.title}</h3>
                   <span className="text-[10px] text-[#8B949E] bg-[#21262D] px-1.5 py-0.5 rounded">{colTasks.length}</span>
@@ -157,7 +157,7 @@ function TaskDialog({ open, onClose, editing, customers, projects, onSaved }) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#161B22] border-[#30363D] text-[#E6EDF3] max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-[#0D0D12] border-[#30363D] text-[#E6EDF3] max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader><DialogTitle className="text-[#E6EDF3]">{editing ? 'Edit Task' : 'Add Task'}</DialogTitle></DialogHeader>
         <div className="space-y-3">
           <div><Label className="text-[#8B949E] text-xs">Task Title *</Label><Input value={form.title || ''} onChange={e => set('title', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
@@ -166,13 +166,13 @@ function TaskDialog({ open, onClose, editing, customers, projects, onSaved }) {
             <div><Label className="text-[#8B949E] text-xs">Related Customer</Label>
               <Select value={form.related_customer_id || ''} onValueChange={onCustomerChange}>
                 <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Optional" /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{c.business_name}</SelectItem>)}</SelectContent>
+                <SelectContent className="bg-[#0D0D12] border-[#30363D]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{c.business_name}</SelectItem>)}</SelectContent>
               </Select>
             </div>
             <div><Label className="text-[#8B949E] text-xs">Related Project</Label>
               <Select value={form.related_project_id || ''} onValueChange={v => set('related_project_id', v)}>
                 <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Optional" /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{projects.map(p => <SelectItem key={p.id} value={p.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{p.project_name}</SelectItem>)}</SelectContent>
+                <SelectContent className="bg-[#0D0D12] border-[#30363D]">{projects.map(p => <SelectItem key={p.id} value={p.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{p.project_name}</SelectItem>)}</SelectContent>
               </Select>
             </div>
           </div>
@@ -180,13 +180,13 @@ function TaskDialog({ open, onClose, editing, customers, projects, onSaved }) {
             <div><Label className="text-[#8B949E] text-xs">Assigned To</Label>
               <Select value={form.assigned_to || 'Owner'} onValueChange={v => set('assigned_to', v)}>
                 <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]"><SelectItem value="Owner" className="text-[#E6EDF3] focus:bg-[#21262D]">Owner</SelectItem><SelectItem value="Partner" className="text-[#E6EDF3] focus:bg-[#21262D]">Partner</SelectItem></SelectContent>
+                <SelectContent className="bg-[#0D0D12] border-[#30363D]"><SelectItem value="Owner" className="text-[#E6EDF3] focus:bg-[#21262D]">Owner</SelectItem><SelectItem value="Partner" className="text-[#E6EDF3] focus:bg-[#21262D]">Partner</SelectItem></SelectContent>
               </Select>
             </div>
             <div><Label className="text-[#8B949E] text-xs">Priority</Label>
               <Select value={form.priority || 'Medium'} onValueChange={v => set('priority', v)}>
                 <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{PRIORITIES.map(p => <SelectItem key={p} value={p} className="text-[#E6EDF3] focus:bg-[#21262D]">{p}</SelectItem>)}</SelectContent>
+                <SelectContent className="bg-[#0D0D12] border-[#30363D]">{PRIORITIES.map(p => <SelectItem key={p} value={p} className="text-[#E6EDF3] focus:bg-[#21262D]">{p}</SelectItem>)}</SelectContent>
               </Select>
             </div>
           </div>
@@ -195,7 +195,7 @@ function TaskDialog({ open, onClose, editing, customers, projects, onSaved }) {
             <div><Label className="text-[#8B949E] text-xs">Status</Label>
               <Select value={form.status || 'To do'} onValueChange={v => set('status', v)}>
                 <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-[#161B22] border-[#30363D]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#E6EDF3] focus:bg-[#21262D]">{s}</SelectItem>)}</SelectContent>
+                <SelectContent className="bg-[#0D0D12] border-[#30363D]">{STATUSES.map(s => <SelectItem key={s} value={s} className="text-[#E6EDF3] focus:bg-[#21262D]">{s}</SelectItem>)}</SelectContent>
               </Select>
             </div>
           </div>

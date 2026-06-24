@@ -77,28 +77,28 @@ export default function Calendar() {
       <PageHeader
         title="Calendar"
         subtitle={`${events.length} events`}
-        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Event</Button>}
+        action={<Button onClick={() => { setEditing(null); setDialogOpen(true); }} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white"><Plus className="w-4 h-4 mr-1.5" />Add Event</Button>}
       />
 
       {/* View toggle + navigation */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <button onClick={() => setCurrentDate(new Date())} className="px-3 py-1.5 text-xs font-medium text-[#E6EDF3] bg-[#21262D] hover:bg-[#30363D] rounded-lg">Today</button>
-          <button onClick={() => setCurrentDate(addMonths(currentDate, -1))} className="w-8 h-8 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center"><ChevronLeft className="w-4 h-4 text-[#8B949E]" /></button>
-          <button onClick={() => setCurrentDate(addMonths(currentDate, 1))} className="w-8 h-8 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center"><ChevronRight className="w-4 h-4 text-[#8B949E]" /></button>
-          <span className="text-sm font-semibold text-[#E6EDF3] ml-1">{view === 'list' ? 'All Events' : format(currentDate, view === 'month' ? 'MMMM yyyy' : 'MMM d, yyyy')}</span>
+          <button onClick={() => setCurrentDate(new Date())} className="px-3 py-1.5 text-xs font-medium text-[#FFFFFF] bg-[#161620] hover:bg-[#1E1E26] rounded-lg">Today</button>
+          <button onClick={() => setCurrentDate(addMonths(currentDate, -1))} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center"><ChevronLeft className="w-4 h-4 text-[#A0A0A0]" /></button>
+          <button onClick={() => setCurrentDate(addMonths(currentDate, 1))} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center"><ChevronRight className="w-4 h-4 text-[#A0A0A0]" /></button>
+          <span className="text-sm font-semibold text-[#FFFFFF] ml-1">{view === 'list' ? 'All Events' : format(currentDate, view === 'month' ? 'MMMM yyyy' : 'MMM d, yyyy')}</span>
         </div>
-        <div className="flex gap-1 bg-[#161B22] border border-[#30363D] rounded-lg p-1">
+        <div className="flex gap-1 bg-[#0D0D12] border border-[#1E1E26] rounded-lg p-1">
           {['month', 'week', 'today', 'list'].map(v => (
-            <button key={v} onClick={() => { setView(v); if (v === 'today') setCurrentDate(new Date()); }} className={`px-3 py-1.5 text-xs font-medium rounded-md capitalize transition-colors ${view === v ? 'bg-[#7C3AED] text-white' : 'text-[#8B949E] hover:text-[#E6EDF3]'}`}>{v}</button>
+            <button key={v} onClick={() => { setView(v); if (v === 'today') setCurrentDate(new Date()); }} className={`px-3 py-1.5 text-xs font-medium rounded-md capitalize transition-colors ${view === v ? 'bg-[#00F0FF] text-white' : 'text-[#A0A0A0] hover:text-[#FFFFFF]'}`}>{v}</button>
           ))}
         </div>
       </div>
 
       {view === 'month' && (
-        <div className="bg-[#161B22] border border-[#30363D] rounded-xl overflow-hidden">
-          <div className="grid grid-cols-7 border-b border-[#30363D]">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <div key={d} className="px-2 py-2 text-center text-[10px] font-semibold text-[#8B949E] uppercase">{d}</div>)}
+        <div className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl overflow-hidden">
+          <div className="grid grid-cols-7 border-b border-[#1E1E26]">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <div key={d} className="px-2 py-2 text-center text-[10px] font-semibold text-[#A0A0A0] uppercase">{d}</div>)}
           </div>
           <div className="grid grid-cols-7">
             {days.map(day => {
@@ -107,13 +107,13 @@ export default function Calendar() {
               const inMonth = isSameMonth(day, currentDate);
               const isToday = isTodayFn(day);
               return (
-                <div key={key} className={`min-h-[80px] sm:min-h-[100px] border-b border-r border-[#30363D] p-1.5 ${!inMonth ? 'bg-[#0D1117]/50' : ''}`}>
-                  <div className={`text-xs font-medium mb-1 ${isToday ? 'w-5 h-5 rounded-full bg-[#7C3AED] text-white flex items-center justify-center' : inMonth ? 'text-[#E6EDF3]' : 'text-[#484F58]'}`}>{format(day, 'd')}</div>
+                <div key={key} className={`min-h-[80px] sm:min-h-[100px] border-b border-r border-[#1E1E26] p-1.5 ${!inMonth ? 'bg-[#050508]/50' : ''}`}>
+                  <div className={`text-xs font-medium mb-1 ${isToday ? 'w-5 h-5 rounded-full bg-[#00F0FF] text-white flex items-center justify-center' : inMonth ? 'text-[#FFFFFF]' : 'text-[#3A3A45]'}`}>{format(day, 'd')}</div>
                   <div className="space-y-0.5">
                     {dayEvents.slice(0, 3).map(ev => (
                       <div key={ev.id} className={`text-[10px] px-1.5 py-0.5 rounded truncate ${TYPE_COLORS[ev.event_type] || 'text-slate-300 bg-slate-500/10'}`}>{ev.title}</div>
                     ))}
-                    {dayEvents.length > 3 && <div className="text-[10px] text-[#8B949E] px-1">+{dayEvents.length - 3} more</div>}
+                    {dayEvents.length > 3 && <div className="text-[10px] text-[#A0A0A0] px-1">+{dayEvents.length - 3} more</div>}
                   </div>
                 </div>
               );
@@ -129,13 +129,13 @@ export default function Calendar() {
             const dayEvents = eventsByDate[key] || [];
             const isToday = isTodayFn(day);
             return (
-              <div key={key} className={`bg-[#161B22] border rounded-xl p-3 min-h-[120px] ${isToday ? 'border-[#7C3AED]' : 'border-[#30363D]'}`}>
-                <p className={`text-xs font-semibold mb-2 ${isToday ? 'text-[#7C3AED]' : 'text-[#E6EDF3]'}`}>{format(day, 'EEE d')}</p>
+              <div key={key} className={`bg-[#0D0D12] border rounded-xl p-3 min-h-[120px] ${isToday ? 'border-[#00F0FF]' : 'border-[#1E1E26]'}`}>
+                <p className={`text-xs font-semibold mb-2 ${isToday ? 'text-[#00F0FF]' : 'text-[#FFFFFF]'}`}>{format(day, 'EEE d')}</p>
                 <div className="space-y-1">
                   {dayEvents.map(ev => (
                     <div key={ev.id} className={`text-[10px] px-1.5 py-1 rounded ${TYPE_COLORS[ev.event_type] || 'text-slate-300 bg-slate-500/10'}`}>
                       <p className="font-medium truncate">{ev.title}</p>
-                      <p className="text-[#8B949E]">{format(new Date(ev.start_datetime), 'h:mm a')}</p>
+                      <p className="text-[#A0A0A0]">{format(new Date(ev.start_datetime), 'h:mm a')}</p>
                     </div>
                   ))}
                 </div>
@@ -164,15 +164,15 @@ export default function Calendar() {
 
 function EventRow({ event, onEdit, onDelete }) {
   return (
-    <div className="flex items-center gap-3 p-3 bg-[#161B22] border border-[#30363D] rounded-xl hover:border-[#484F58] transition-colors">
+    <div className="flex items-center gap-3 p-3 bg-[#0D0D12] border border-[#1E1E26] rounded-xl hover:border-[#3A3A45] transition-colors">
       <div className={`px-2 py-1 rounded text-[10px] font-medium ${TYPE_COLORS[event.event_type] || 'text-slate-300 bg-slate-500/10'}`}>{event.event_type}</div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-[#E6EDF3] truncate">{event.title}</p>
-        <p className="text-xs text-[#8B949E] flex items-center gap-1.5"><Clock className="w-3 h-3" />{format(new Date(event.start_datetime), 'MMM d, h:mm a')}{event.end_datetime && ` → ${format(new Date(event.end_datetime), 'h:mm a')}`}</p>
+        <p className="text-sm font-medium text-[#FFFFFF] truncate">{event.title}</p>
+        <p className="text-xs text-[#A0A0A0] flex items-center gap-1.5"><Clock className="w-3 h-3" />{format(new Date(event.start_datetime), 'MMM d, h:mm a')}{event.end_datetime && ` → ${format(new Date(event.end_datetime), 'h:mm a')}`}</p>
       </div>
       <div className="flex gap-1">
-        <button onClick={onEdit} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-[#30363D] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#8B949E]" /></button>
-        <button onClick={onDelete} className="w-7 h-7 rounded-lg bg-[#21262D] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#8B949E] hover:text-red-400" /></button>
+        <button onClick={onEdit} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center"><Pencil className="w-3 h-3 text-[#A0A0A0]" /></button>
+        <button onClick={onDelete} className="w-7 h-7 rounded-lg bg-[#161620] hover:bg-red-500/20 flex items-center justify-center"><Trash2 className="w-3 h-3 text-[#A0A0A0] hover:text-red-400" /></button>
       </div>
     </div>
   );
@@ -201,53 +201,53 @@ function EventDialog({ open, onClose, editing, leads, customers, projects, onSav
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#161B22] border-[#30363D] text-[#E6EDF3] max-w-lg max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle className="text-[#E6EDF3]">{editing ? 'Edit Event' : 'Add Event'}</DialogTitle></DialogHeader>
+      <DialogContent className="bg-[#0D0D12] border-[#1E1E26] text-[#FFFFFF] max-w-lg max-h-[90vh] overflow-y-auto">
+        <DialogHeader><DialogTitle className="text-[#FFFFFF]">{editing ? 'Edit Event' : 'Add Event'}</DialogTitle></DialogHeader>
         <div className="space-y-3">
-          <div><Label className="text-[#8B949E] text-xs">Event Title *</Label><Input value={form.title || ''} onChange={e => set('title', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-          <div><Label className="text-[#8B949E] text-xs">Event Type</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Event Title *</Label><Input value={form.title || ''} onChange={e => set('title', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Event Type</Label>
             <Select value={form.event_type || 'Customer meeting'} onValueChange={v => set('event_type', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{EVENT_TYPES.map(t => <SelectItem key={t} value={t} className="text-[#E6EDF3] focus:bg-[#21262D]">{t}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{EVENT_TYPES.map(t => <SelectItem key={t} value={t} className="text-[#FFFFFF] focus:bg-[#161620]">{t}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label className="text-[#8B949E] text-xs">Start</Label><Input type="datetime-local" value={form.start_datetime ? format(new Date(form.start_datetime), "yyyy-MM-dd'T'HH:mm") : ''} onChange={e => set('start_datetime', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
-            <div><Label className="text-[#8B949E] text-xs">End</Label><Input type="datetime-local" value={form.end_datetime ? format(new Date(form.end_datetime), "yyyy-MM-dd'T'HH:mm") : ''} onChange={e => set('end_datetime', e.target.value)} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">Start</Label><Input type="datetime-local" value={form.start_datetime ? format(new Date(form.start_datetime), "yyyy-MM-dd'T'HH:mm") : ''} onChange={e => set('start_datetime', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
+            <div><Label className="text-[#A0A0A0] text-xs">End</Label><Input type="datetime-local" value={form.end_datetime ? format(new Date(form.end_datetime), "yyyy-MM-dd'T'HH:mm") : ''} onChange={e => set('end_datetime', e.target.value)} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]" /></div>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Related Lead</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Related Lead</Label>
             <Select value={form.related_lead_id || ''} onValueChange={v => set('related_lead_id', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Optional" /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{leads.map(l => <SelectItem key={l.id} value={l.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{l.company_name}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Optional" /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{leads.map(l => <SelectItem key={l.id} value={l.id} className="text-[#FFFFFF] focus:bg-[#161620]">{l.company_name}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Related Customer</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Related Customer</Label>
             <Select value={form.related_customer_id || ''} onValueChange={v => set('related_customer_id', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Optional" /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{c.business_name}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Optional" /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{customers.map(c => <SelectItem key={c.id} value={c.id} className="text-[#FFFFFF] focus:bg-[#161620]">{c.business_name}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Related Project</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Related Project</Label>
             <Select value={form.related_project_id || ''} onValueChange={v => set('related_project_id', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue placeholder="Optional" /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]">{projects.map(p => <SelectItem key={p.id} value={p.id} className="text-[#E6EDF3] focus:bg-[#21262D]">{p.project_name}</SelectItem>)}</SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue placeholder="Optional" /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]">{projects.map(p => <SelectItem key={p.id} value={p.id} className="text-[#FFFFFF] focus:bg-[#161620]">{p.project_name}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Assigned Partner</Label>
+          <div><Label className="text-[#A0A0A0] text-xs">Assigned Partner</Label>
             <Select value={form.assigned_partner || 'Owner'} onValueChange={v => set('assigned_partner', v)}>
-              <SelectTrigger className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3]"><SelectValue /></SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-[#30363D]"><SelectItem value="Owner" className="text-[#E6EDF3] focus:bg-[#21262D]">Owner</SelectItem><SelectItem value="Partner" className="text-[#E6EDF3] focus:bg-[#21262D]">Partner</SelectItem></SelectContent>
+              <SelectTrigger className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF]"><SelectValue /></SelectTrigger>
+              <SelectContent className="bg-[#0D0D12] border-[#1E1E26]"><SelectItem value="Owner" className="text-[#FFFFFF] focus:bg-[#161620]">Owner</SelectItem><SelectItem value="Partner" className="text-[#FFFFFF] focus:bg-[#161620]">Partner</SelectItem></SelectContent>
             </Select>
           </div>
           <div className="flex items-center gap-2">
-            <input type="checkbox" id="reminder" checked={!!form.reminder_enabled} onChange={e => set('reminder_enabled', e.target.checked)} className="w-4 h-4 rounded border-[#30363D] accent-[#7C3AED]" />
-            <Label htmlFor="reminder" className="text-xs text-[#8B949E]">Enable reminder</Label>
+            <input type="checkbox" id="reminder" checked={!!form.reminder_enabled} onChange={e => set('reminder_enabled', e.target.checked)} className="w-4 h-4 rounded border-[#1E1E26] accent-[#00F0FF]" />
+            <Label htmlFor="reminder" className="text-xs text-[#A0A0A0]">Enable reminder</Label>
           </div>
-          <div><Label className="text-[#8B949E] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#0D1117] border-[#30363D] text-[#E6EDF3] resize-none" /></div>
+          <div><Label className="text-[#A0A0A0] text-xs">Notes</Label><Textarea value={form.notes || ''} onChange={e => set('notes', e.target.value)} rows={2} className="mt-1 bg-[#050508] border-[#1E1E26] text-[#FFFFFF] resize-none" /></div>
         </div>
         <DialogFooter>
-          <Button variant="ghost" onClick={onClose} className="text-[#8B949E]">Cancel</Button>
-          <Button onClick={handleSave} disabled={saving || !form.title} className="bg-[#7C3AED] hover:bg-[#6E56CF] text-white">{saving ? 'Saving...' : 'Save'}</Button>
+          <Button variant="ghost" onClick={onClose} className="text-[#A0A0A0]">Cancel</Button>
+          <Button onClick={handleSave} disabled={saving || !form.title} className="bg-[#00F0FF] hover:bg-[#00C8D6] text-white">{saving ? 'Saving...' : 'Save'}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

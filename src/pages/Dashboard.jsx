@@ -57,10 +57,14 @@ export default function Dashboard() {
   }).sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime)).slice(0, 5);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="!p-6 max-w-7xl mx-auto">
+      {/* Welcome section */}
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-[#E6EDF3]">Dashboard</h1>
-        <p className="text-sm text-[#8B949E] mt-0.5">{format(today, 'EEEE, MMMM d, yyyy')}</p>
+        <p className="text-xs text-[#00F0FF] font-medium uppercase tracking-wider mb-1">{format(today, 'EEEE, MMMM d, yyyy')}</p>
+        <h1 className="text-2xl font-bold text-white">Command Center</h1>
+        <p className="text-sm text-[#A0A0A0] mt-1">
+          {todayFollowUps.length} follow-ups today • {paymentsDueThisWeek.length} payments due this week • ${mrr.toLocaleString()}/mo MRR
+        </p>
       </div>
 
       {/* Metric cards */}
@@ -78,16 +82,16 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Today's Follow-Ups */}
-        <SectionCard title="Today's Follow-Ups" action={<Link to="/leads" className="text-xs text-[#7C3AED] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
+        <SectionCard title="Today's Follow-Ups" action={<Link to="/leads" className="text-xs text-[#00F0FF] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
           {todayFollowUps.length === 0 ? (
             <EmptyState icon={Phone} title="No follow-ups today" subtitle="You're all caught up" />
           ) : (
             <div className="space-y-2">
               {todayFollowUps.slice(0, 5).map(lead => (
-                <div key={lead.id} className="flex items-center justify-between p-3 rounded-lg bg-[#0D1117] border border-[#30363D] hover:border-[#484F58] transition-colors">
+                <div key={lead.id} className="flex items-center justify-between !p-3 rounded-lg bg-[#050508] border border-[#1E1E26] hover:border-[#3A3A45] transition-colors">
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-[#E6EDF3] truncate">{lead.company_name}</p>
-                    <p className="text-xs text-[#8B949E]">{lead.contact_name} • {lead.priority} priority</p>
+                    <p className="text-sm font-medium text-white truncate">{lead.company_name}</p>
+                    <p className="text-xs text-[#A0A0A0]">{lead.contact_name} • {lead.priority} priority</p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <StatusBadge status={lead.status} />
@@ -99,7 +103,7 @@ export default function Dashboard() {
         </SectionCard>
 
         {/* Active Projects */}
-        <SectionCard title="Active Projects" action={<Link to="/projects" className="text-xs text-[#7C3AED] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
+        <SectionCard title="Active Projects" action={<Link to="/projects" className="text-xs text-[#00F0FF] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
           {activeProjects.length === 0 ? (
             <EmptyState icon={FolderKanban} title="No active projects" />
           ) : (
@@ -109,16 +113,16 @@ export default function Dashboard() {
                 const completed = checklistItems.filter(k => proj[k]).length;
                 const pct = Math.round((completed / checklistItems.length) * 100);
                 return (
-                  <div key={proj.id} className="p-3 rounded-lg bg-[#0D1117] border border-[#30363D] hover:border-[#484F58] transition-colors">
+                  <div key={proj.id} className="!p-3 rounded-lg bg-[#050508] border border-[#1E1E26] hover:border-[#3A3A45] transition-colors">
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-sm font-medium text-[#E6EDF3] truncate">{proj.project_name}</p>
+                      <p className="text-sm font-medium text-white truncate">{proj.project_name}</p>
                       <StatusBadge status={proj.status} />
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="flex-1 h-1.5 bg-[#21262D] rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-[#7C3AED] to-[#6E56CF] rounded-full transition-all" style={{ width: `${pct}%` }} />
+                      <div className="flex-1 h-1.5 bg-[#161620] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#00F0FF] rounded-full transition-all" style={{ width: `${pct}%` }} />
                       </div>
-                      <span className="text-[10px] text-[#8B949E] font-medium tabular-nums">{pct}%</span>
+                      <span className="text-[10px] text-[#A0A0A0] font-medium tabular-nums">{pct}%</span>
                     </div>
                   </div>
                 );
@@ -128,16 +132,16 @@ export default function Dashboard() {
         </SectionCard>
 
         {/* Upcoming Payments */}
-        <SectionCard title="Upcoming Payments" action={<Link to="/payments" className="text-xs text-[#7C3AED] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
+        <SectionCard title="Upcoming Payments" action={<Link to="/payments" className="text-xs text-[#00F0FF] hover:underline flex items-center gap-1">View all <ArrowRight className="w-3 h-3" /></Link>}>
           {paymentsDueThisWeek.length === 0 && overduePayments.length === 0 ? (
             <EmptyState icon={DollarSign} title="No upcoming payments" />
           ) : (
             <div className="space-y-2">
               {[...overduePayments, ...paymentsDueThisWeek].slice(0, 5).map(pay => (
-                <div key={pay.id} className="flex items-center justify-between p-3 rounded-lg bg-[#0D1117] border border-[#30363D]">
+                <div key={pay.id} className="flex items-center justify-between !p-3 rounded-lg bg-[#050508] border border-[#1E1E26]">
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-[#E6EDF3] truncate">{pay.customer_name || 'Unknown'}</p>
-                    <p className="text-xs text-[#8B949E]">${pay.amount?.toLocaleString() || 0} • {pay.due_date ? format(new Date(pay.due_date), 'MMM d') : 'No date'}</p>
+                    <p className="text-sm font-medium text-white truncate">{pay.customer_name || 'Unknown'}</p>
+                    <p className="text-xs text-[#A0A0A0]">${pay.amount?.toLocaleString() || 0} • {pay.due_date ? format(new Date(pay.due_date), 'MMM d') : 'No date'}</p>
                   </div>
                   <StatusBadge status={pay.status} />
                 </div>
@@ -147,20 +151,20 @@ export default function Dashboard() {
         </SectionCard>
 
         {/* Calendar Preview */}
-        <SectionCard title="Calendar Preview" action={<Link to="/calendar" className="text-xs text-[#7C3AED] hover:underline flex items-center gap-1">View calendar <ArrowRight className="w-3 h-3" /></Link>}>
+        <SectionCard title="Calendar Preview" action={<Link to="/calendar" className="text-xs text-[#00F0FF] hover:underline flex items-center gap-1">View calendar <ArrowRight className="w-3 h-3" /></Link>}>
           {upcomingEvents.length === 0 ? (
             <EmptyState icon={CalIcon} title="No upcoming events" subtitle="Next 7 days are clear" />
           ) : (
             <div className="space-y-2">
               {upcomingEvents.map(ev => (
-                <div key={ev.id} className="flex items-center gap-3 p-3 rounded-lg bg-[#0D1117] border border-[#30363D]">
+                <div key={ev.id} className="flex items-center gap-3 !p-3 rounded-lg bg-[#050508] border border-[#1E1E26]">
                   <div className="w-10 text-center flex-shrink-0">
-                    <p className="text-[10px] text-[#8B949E] uppercase">{format(new Date(ev.start_datetime), 'MMM')}</p>
-                    <p className="text-base font-bold text-[#E6EDF3] leading-none">{format(new Date(ev.start_datetime), 'd')}</p>
+                    <p className="text-[10px] text-[#A0A0A0] uppercase">{format(new Date(ev.start_datetime), 'MMM')}</p>
+                    <p className="text-base font-bold text-white leading-none">{format(new Date(ev.start_datetime), 'd')}</p>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-[#E6EDF3] truncate">{ev.title}</p>
-                    <p className="text-xs text-[#8B949E]">{format(new Date(ev.start_datetime), 'h:mm a')} • {ev.event_type}</p>
+                    <p className="text-sm font-medium text-white truncate">{ev.title}</p>
+                    <p className="text-xs text-[#A0A0A0]">{format(new Date(ev.start_datetime), 'h:mm a')} • {ev.event_type}</p>
                   </div>
                 </div>
               ))}

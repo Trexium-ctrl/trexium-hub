@@ -2,7 +2,6 @@ import React from 'react';
 
 export function StatusBadge({ status }) {
   const colorMap = {
-    // Lead statuses
     'Not contacted': 'bg-blue-500/15 text-blue-400 border-blue-500/20',
     'Contacted': 'bg-slate-500/15 text-slate-300 border-slate-500/20',
     'Follow-up needed': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
@@ -12,7 +11,6 @@ export function StatusBadge({ status }) {
     'Won': 'bg-green-500/15 text-green-400 border-green-500/20',
     'Lost': 'bg-red-500/15 text-red-400 border-red-500/20',
     'Not interested': 'bg-red-500/15 text-red-400 border-red-500/20',
-    // Customer statuses
     'Active': 'bg-green-500/15 text-green-400 border-green-500/20',
     'Website in progress': 'bg-blue-500/15 text-blue-400 border-blue-500/20',
     'Waiting on customer': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
@@ -20,15 +18,12 @@ export function StatusBadge({ status }) {
     'Past due': 'bg-red-500/15 text-red-400 border-red-500/20',
     'Paused': 'bg-slate-500/15 text-slate-400 border-slate-500/20',
     'Canceled': 'bg-slate-500/15 text-slate-400 border-slate-500/20',
-    // Payment statuses
     'Paid': 'bg-green-500/15 text-green-400 border-green-500/20',
     'Due soon': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
     'Overdue': 'bg-red-500/15 text-red-400 border-red-500/20',
-    // Task statuses
     'To do': 'bg-slate-500/15 text-slate-300 border-slate-500/20',
     'In progress': 'bg-blue-500/15 text-blue-400 border-blue-500/20',
     'Done': 'bg-green-500/15 text-green-400 border-green-500/20',
-    // Project statuses
     'Not started': 'bg-slate-500/15 text-slate-300 border-slate-500/20',
     'Waiting on questionnaire': 'bg-amber-500/15 text-amber-400 border-amber-500/20',
     'Planning': 'bg-cyan-500/15 text-cyan-400 border-cyan-500/20',
@@ -39,7 +34,6 @@ export function StatusBadge({ status }) {
     'Revisions': 'bg-orange-500/15 text-orange-400 border-orange-500/20',
     'Ready to launch': 'bg-violet-500/15 text-violet-400 border-violet-500/20',
     'Maintenance': 'bg-cyan-500/15 text-cyan-400 border-cyan-500/20',
-    // Questionnaire statuses
     'Blank template': 'bg-slate-500/15 text-slate-300 border-slate-500/20',
     'Sent to customer': 'bg-cyan-500/15 text-cyan-400 border-cyan-500/20',
     'Completed': 'bg-green-500/15 text-green-400 border-green-500/20',
@@ -50,7 +44,7 @@ export function StatusBadge({ status }) {
   const cls = colorMap[status] || 'bg-slate-500/15 text-slate-300 border-slate-500/20';
 
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium border ${cls}`}>
+    <span className={`inline-flex items-center !px-2 !py-0.5 rounded-md text-[11px] font-medium border ${cls}`}>
       {status}
     </span>
   );
@@ -65,7 +59,7 @@ export function PriorityBadge({ priority }) {
   };
   const cls = colorMap[priority] || colorMap['Medium'];
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium border ${cls}`}>
+    <span className={`inline-flex items-center !px-2 !py-0.5 rounded-md text-[11px] font-medium border ${cls}`}>
       {priority}
     </span>
   );
@@ -82,24 +76,24 @@ export function MetricCard({ icon: Icon, label, value, accent }) {
     'cyan': 'text-cyan-400',
   };
   return (
-    <div className="bg-[#161B22] border border-[#30363D] rounded-xl p-4 hover:border-[#484F58] transition-colors">
+    <div className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl !p-4 hover:border-[#3A3A45] transition-colors">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[11px] text-[#8B949E] font-medium uppercase tracking-wide">{label}</span>
-        <Icon className={`w-4 h-4 ${accentMap[accent] || 'text-[#8B949E]'}`} />
+        <span className="text-[11px] text-[#A0A0A0] font-medium uppercase tracking-wide">{label}</span>
+        <Icon className={`w-4 h-4 ${accentMap[accent] || 'text-[#A0A0A0]'}`} />
       </div>
-      <p className="text-2xl font-bold text-[#E6EDF3]">{value}</p>
+      <p className="text-2xl font-bold text-white">{value}</p>
     </div>
   );
 }
 
 export function SectionCard({ title, children, action }) {
   return (
-    <div className="bg-[#161B22] border border-[#30363D] rounded-xl overflow-hidden">
-      <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#30363D]">
-        <h3 className="text-sm font-semibold text-[#E6EDF3]">{title}</h3>
+    <div className="bg-[#0D0D12] border border-[#1E1E26] rounded-xl overflow-hidden">
+      <div className="flex items-center justify-between !px-5 !py-3.5 border-b border-[#1E1E26]">
+        <h3 className="text-sm font-semibold text-white">{title}</h3>
         {action}
       </div>
-      <div className="p-4">{children}</div>
+      <div className="!p-4">{children}</div>
     </div>
   );
 }
@@ -108,8 +102,8 @@ export function PageHeader({ title, subtitle, action }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
       <div>
-        <h1 className="text-xl font-bold text-[#E6EDF3]">{title}</h1>
-        {subtitle && <p className="text-sm text-[#8B949E] mt-0.5">{subtitle}</p>}
+        <h1 className="text-xl font-bold text-white">{title}</h1>
+        {subtitle && <p className="text-sm text-[#A0A0A0] mt-0.5">{subtitle}</p>}
       </div>
       {action}
     </div>
@@ -118,20 +112,20 @@ export function PageHeader({ title, subtitle, action }) {
 
 export function EmptyState({ icon: Icon, title, subtitle }) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="w-12 h-12 rounded-xl bg-[#21262D] flex items-center justify-center mb-3">
-        <Icon className="w-6 h-6 text-[#484F58]" />
+    <div className="flex flex-col items-center justify-center !py-12 text-center">
+      <div className="w-12 h-12 rounded-xl bg-[#161620] flex items-center justify-center mb-3">
+        <Icon className="w-6 h-6 text-[#3A3A45]" />
       </div>
-      <p className="text-sm font-medium text-[#8B949E]">{title}</p>
-      {subtitle && <p className="text-xs text-[#484F58] mt-1">{subtitle}</p>}
+      <p className="text-sm font-medium text-[#A0A0A0]">{title}</p>
+      {subtitle && <p className="text-xs text-[#3A3A45] mt-1">{subtitle}</p>}
     </div>
   );
 }
 
 export function LoadingState() {
   return (
-    <div className="flex items-center justify-center py-16">
-      <div className="w-6 h-6 border-2 border-[#30363D] border-t-[#7C3AED] rounded-full animate-spin" />
+    <div className="flex items-center justify-center !py-16">
+      <div className="w-6 h-6 border-2 border-[#1E1E26] border-t-[#00F0FF] rounded-full animate-spin" />
     </div>
   );
 }
