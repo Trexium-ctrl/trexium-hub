@@ -1,0 +1,92 @@
+{
+  "name": "Lead",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "website_url": {
+      "type": "string"
+    },
+    "current_website_quality": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Poor",
+        "Average",
+        "Good"
+      ],
+      "default": "None"
+    },
+    "contact_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Not contacted",
+        "Contacted",
+        "Follow-up needed",
+        "Meeting booked",
+        "Questionnaire sent",
+        "Proposal sent",
+        "Won",
+        "Lost",
+        "Not interested"
+      ],
+      "default": "Not contacted"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "default": "Medium"
+    },
+    "last_contacted_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "next_follow_up_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "assigned_partner": {
+      "type": "string",
+      "enum": [
+        "Owner",
+        "Partner"
+      ],
+      "default": "Owner"
+    },
+    "estimated_value": {
+      "type": "number"
+    },
+    "services_needed": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_name"
+  ]
+}

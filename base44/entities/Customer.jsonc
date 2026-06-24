@@ -1,0 +1,83 @@
+{
+  "name": "Customer",
+  "type": "object",
+  "properties": {
+    "business_name": {
+      "type": "string"
+    },
+    "contact_name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "website_url": {
+      "type": "string"
+    },
+    "domain_provider": {
+      "type": "string"
+    },
+    "hosting_status": {
+      "type": "string"
+    },
+    "service_package": {
+      "type": "string"
+    },
+    "monthly_payment_amount": {
+      "type": "number"
+    },
+    "setup_fee": {
+      "type": "number"
+    },
+    "hosting_fee": {
+      "type": "number"
+    },
+    "maintenance_fee": {
+      "type": "number"
+    },
+    "payment_due_day": {
+      "type": "number"
+    },
+    "payment_method": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Website in progress",
+        "Waiting on customer",
+        "Launched",
+        "Past due",
+        "Paused",
+        "Canceled"
+      ],
+      "default": "Active"
+    },
+    "assigned_partner": {
+      "type": "string",
+      "enum": [
+        "Owner",
+        "Partner"
+      ],
+      "default": "Owner"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "renewal_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "business_name"
+  ]
+}

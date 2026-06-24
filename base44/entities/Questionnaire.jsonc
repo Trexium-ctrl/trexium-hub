@@ -1,0 +1,44 @@
+{
+  "name": "Questionnaire",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "file_url": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Blank template",
+        "Sent to customer",
+        "Completed",
+        "Needs clarification",
+        "Approved for build"
+      ],
+      "default": "Blank template"
+    },
+    "ai_build_notes": {
+      "type": "string"
+    },
+    "uploaded_by": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "file_name"
+  ]
+}

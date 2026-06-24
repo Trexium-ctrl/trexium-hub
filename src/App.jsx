@@ -6,7 +6,17 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
-// Add page imports here
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
+import Leads from './pages/Leads';
+import Customers from './pages/Customers';
+import Projects from './pages/Projects';
+import Questionnaires from './pages/Questionnaires';
+import Calendar from './pages/Calendar';
+import Payments from './pages/Payments';
+import Files from './pages/Files';
+import Tasks from './pages/Tasks';
+import Settings from './pages/Settings';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -34,7 +44,18 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
-      {/* Add your page Route elements here */}
+      <Route element={<Layout />}>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/leads" element={<Leads />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/questionnaires" element={<Questionnaires />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/payments" element={<Payments />} />
+        <Route path="/files" element={<Files />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

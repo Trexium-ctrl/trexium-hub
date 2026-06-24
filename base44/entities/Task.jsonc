@@ -1,0 +1,59 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "related_customer_id": {
+      "type": "string"
+    },
+    "related_customer_name": {
+      "type": "string"
+    },
+    "related_project_id": {
+      "type": "string"
+    },
+    "assigned_to": {
+      "type": "string",
+      "enum": [
+        "Owner",
+        "Partner"
+      ],
+      "default": "Owner"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Urgent"
+      ],
+      "default": "Medium"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "To do",
+        "In progress",
+        "Waiting on customer",
+        "Done"
+      ],
+      "default": "To do"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

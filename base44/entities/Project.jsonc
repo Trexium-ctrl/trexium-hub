@@ -1,0 +1,144 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "project_name": {
+      "type": "string"
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "New website",
+        "Redesign",
+        "Landing page",
+        "E-commerce",
+        "Maintenance"
+      ],
+      "default": "New website"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Not started",
+        "Waiting on questionnaire",
+        "Planning",
+        "Design started",
+        "Development started",
+        "Waiting on content",
+        "Waiting on customer review",
+        "Revisions",
+        "Ready to launch",
+        "Launched",
+        "Maintenance"
+      ],
+      "default": "Not started"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "target_launch_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "actual_launch_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "assigned_partner": {
+      "type": "string",
+      "enum": [
+        "Owner",
+        "Partner"
+      ],
+      "default": "Owner"
+    },
+    "website_package": {
+      "type": "string"
+    },
+    "domain_connected": {
+      "type": "boolean",
+      "default": false
+    },
+    "hosting_connected": {
+      "type": "boolean",
+      "default": false
+    },
+    "customer_added": {
+      "type": "boolean",
+      "default": false
+    },
+    "questionnaire_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "questionnaire_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "domain_info_received": {
+      "type": "boolean",
+      "default": false
+    },
+    "logo_received": {
+      "type": "boolean",
+      "default": false
+    },
+    "photos_received": {
+      "type": "boolean",
+      "default": false
+    },
+    "copy_written": {
+      "type": "boolean",
+      "default": false
+    },
+    "homepage_built": {
+      "type": "boolean",
+      "default": false
+    },
+    "inner_pages_built": {
+      "type": "boolean",
+      "default": false
+    },
+    "mobile_checked": {
+      "type": "boolean",
+      "default": false
+    },
+    "contact_form_tested": {
+      "type": "boolean",
+      "default": false
+    },
+    "seo_added": {
+      "type": "boolean",
+      "default": false
+    },
+    "analytics_added": {
+      "type": "boolean",
+      "default": false
+    },
+    "customer_approved": {
+      "type": "boolean",
+      "default": false
+    },
+    "website_launched": {
+      "type": "boolean",
+      "default": false
+    },
+    "payment_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_name"
+  ]
+}

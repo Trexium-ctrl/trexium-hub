@@ -1,0 +1,61 @@
+{
+  "name": "CalendarEvent",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "Sales call",
+        "Follow-up call",
+        "Customer meeting",
+        "Website planning",
+        "Build day",
+        "Revision deadline",
+        "Launch date",
+        "Payment due",
+        "Monthly maintenance",
+        "Internal meeting"
+      ],
+      "default": "Customer meeting"
+    },
+    "related_lead_id": {
+      "type": "string"
+    },
+    "related_customer_id": {
+      "type": "string"
+    },
+    "related_project_id": {
+      "type": "string"
+    },
+    "start_datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assigned_partner": {
+      "type": "string",
+      "enum": [
+        "Owner",
+        "Partner"
+      ],
+      "default": "Owner"
+    },
+    "reminder_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "start_datetime"
+  ]
+}
