@@ -6,7 +6,8 @@
       "enum": [
         "admin",
         "user"
-      ]
+      ],
+      "default": "admin"
     }
   },
   "required": [
