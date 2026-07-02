@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
+import { base44 } from '@/lib/supabaseClient';
 import { MetricCard, SectionCard, StatusBadge, LoadingState, EmptyState } from '@/components/shared';
 import {
   Users, Building2, FolderKanban, DollarSign, AlertTriangle, Calendar as CalIcon,

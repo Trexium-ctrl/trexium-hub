@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { appParams } from '@/lib/app-params';
-import { createAxiosClient } from '@base44/sdk/dist/utils/axios-client';
+import { supabase } from '@/lib/supabaseClient';
 
 const AuthContext = createContext();
 
@@ -20,8 +19,22 @@ export const AuthProvider = ({ children }) => {
 
   const checkAppState = async () => {
     setIsLoadingPublicSettings(false);
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      setUser({ id: session.user.id, email: session.user.email, full_name: session.user.user_metadata?.full_name || session.user.email });
+      setIsAuthenticated(true);
+    }
     setIsLoadingAuth(false);
     setAuthChecked(true);
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        setUser({ id: session.user.id, email: session.user.email, full_name: session.user.user_metadata?.full_name || session.user.email });
+        setIsAuthenticated(true);
+      } else {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    });
   };
 
   const checkUserAuth = async () => {
@@ -50,21 +63,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = (shouldRedirect = true) => {
+    supabase.auth.signOut();
     setUser(null);
     setIsAuthenticated(false);
-    
-    if (shouldRedirect) {
-      // Use the SDK's logout method which handles token cleanup and redirect
-      base44.auth.logout(window.location.href);
-    } else {
-      // Just remove the token without redirect
-      base44.auth.logout();
-    }
+    if (shouldRedirect) window.location.href = '/login';
   };
 
   const navigateToLogin = () => {
-    // Use the SDK's redirectToLogin method
-    base44.auth.redirectToLogin(window.location.href);
+    window.location.href = '/login';
   };
 
   return (

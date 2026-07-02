@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Lock, Loader2 } from "lucide-react";
-
-const PASSWORD = "Trexium4994!";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    setTimeout(() => {
-      if (password === PASSWORD) {
-        localStorage.setItem("trexium_auth", "true");
-        window.location.href = "/";
-      } else {
-        setError("Incorrect password");
-        setLoading(false);
-      }
-    }, 400);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      window.location.href = "/";
+    } catch (err) {
+      setError(err.message || "Failed to sign in");
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +33,7 @@ export default function Login() {
             <Lock className="w-7 h-7 text-[#00F0FF]" />
           </div>
           <h1 className="text-2xl font-bold text-white tracking-tight">Trexium Hub</h1>
-          <p className="text-sm text-[#A0A0A0] mt-1">Enter password to continue</p>
+          <p className="text-sm text-[#A0A0A0] mt-1">Sign in to continue</p>
         </div>
         <div className="bg-[#0D0D12] border border-[#1E1E26] rounded-2xl p-6">
           {error && (
@@ -42,23 +42,37 @@ export default function Login() {
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              type="password"
-              autoFocus
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="h-12 bg-[#050508] border-[#1E1E26] text-white placeholder:text-[#3A3A45]"
-              required
-            />
+            <div>
+              <Label className="text-[#A0A0A0] text-xs">Email</Label>
+              <Input
+                type="email"
+                autoFocus
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 h-12 bg-[#050508] border-[#1E1E26] text-white placeholder:text-[#3A3A45]"
+                required
+              />
+            </div>
+            <div>
+              <Label className="text-[#A0A0A0] text-xs">Password</Label>
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 h-12 bg-[#050508] border-[#1E1E26] text-white placeholder:text-[#3A3A45]"
+                required
+              />
+            </div>
             <Button type="submit" className="w-full h-12 bg-[#00F0FF] hover:bg-[#00C8D6] text-white font-medium" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Verifying...
+                  Signing in...
                 </>
               ) : (
-                "Enter"
+                "Sign In"
               )}
             </Button>
           </form>

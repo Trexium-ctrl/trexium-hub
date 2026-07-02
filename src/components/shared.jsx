@@ -1,5 +1,4 @@
 import React from 'react';
-import { useUsers } from '@/hooks/useUsers';
 import { format } from 'date-fns';
 
 export function StatusBadge({ status }) {
@@ -133,12 +132,9 @@ export function LoadingState() {
 }
 
 export function AuditTrail({ record }) {
-  const { users } = useUsers();
-
   if (!record || !record.id) return null;
 
-  const creator = users.find(u => u.id === record.created_by_id);
-  const createdName = creator?.full_name || creator?.email || 'Unknown user';
+  const createdName = record.created_by_id || 'Unknown user';
   const createdDate = record.created_date ? format(new Date(record.created_date), 'MMM d, yyyy · h:mm a') : null;
   const updatedDate = record.updated_date ? format(new Date(record.updated_date), 'MMM d, yyyy · h:mm a') : null;
   const wasEdited =

@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Upload, X } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { base44 } from '@/lib/supabaseClient';
 
 export default function FileUploadDialog({ open, onClose, onUploaded, customerId, customerName, category }) {
   const [file, setFile] = useState(null);

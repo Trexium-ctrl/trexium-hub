@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useAuth } from '@/lib/AuthContext';
+import { supabase } from '@/lib/supabaseClient';
 import {
   LayoutDashboard, Users, Building2, FolderKanban, FileQuestion,
   Calendar, DollarSign, FolderOpen, CheckSquare, Settings, Menu, X, LogOut, ScrollText
@@ -21,6 +23,7 @@ const navItems = [
 
 export default function Layout() {
   const location = useLocation();
+  const { user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -109,10 +112,10 @@ export default function Layout() {
               <span className="text-xs font-bold text-white">T</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-white truncate">Trexium</p>
-              <p className="text-[10px] text-[#A0A0A0]">Admin</p>
+              <p className="text-xs font-medium text-white truncate">{user?.email || 'User'}</p>
+              <p className="text-[10px] text-[#A0A0A0]">Signed in</p>
             </div>
-            <button onClick={() => { localStorage.removeItem('trexium_auth'); window.location.href = '/login'; }} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center" title="Sign out">
+            <button onClick={() => { supabase.auth.signOut().then(() => { window.location.href = '/login'; }); }} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center" title="Sign out">
               <LogOut className="w-3.5 h-3.5 text-[#A0A0A0]" />
             </button>
           </div>

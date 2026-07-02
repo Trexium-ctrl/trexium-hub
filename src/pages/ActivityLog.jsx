@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
+import { base44 } from '@/lib/supabaseClient';
 import { PageHeader, LoadingState } from '@/components/shared';
 import { format } from 'date-fns';
 
