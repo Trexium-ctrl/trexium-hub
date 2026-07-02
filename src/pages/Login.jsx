@@ -65,7 +65,7 @@ export default function Login() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full h-12 bg-[#00F0FF] hover:bg-[#00C8D6] text-white font-medium" disabled={loading}>
+            <Button type="submit" className="w-full h-12 bg-[#0A93B0] hover:bg-[#0A7B95] text-white font-medium" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
