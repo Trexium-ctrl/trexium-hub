@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { useAuth } from '@/lib/AuthContext';
 import {
   LayoutDashboard, Users, Building2, FolderKanban, FileQuestion,
-  Calendar, DollarSign, FolderOpen, CheckSquare, Settings, Menu, X, LogOut
+  Calendar, DollarSign, FolderOpen, CheckSquare, Settings, Menu, X, LogOut, ScrollText
 } from 'lucide-react';
 
 const navItems = [
@@ -16,12 +15,12 @@ const navItems = [
   { path: '/payments', label: 'Payments', icon: DollarSign },
   { path: '/files', label: 'Files', icon: FolderOpen },
   { path: '/tasks', label: 'Tasks', icon: CheckSquare },
+  { path: '/activity', label: 'Activity Log', icon: ScrollText },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];
 
 export default function Layout() {
   const location = useLocation();
-  const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -107,13 +106,13 @@ export default function Layout() {
         <div className="!p-4 border-t border-[#1E1E26]">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00F0FF] to-[#00C8D6] flex items-center justify-center">
-              <span className="text-xs font-bold text-white">{(user?.full_name || user?.email || 'T')[0].toUpperCase()}</span>
+              <span className="text-xs font-bold text-white">T</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-white truncate">{user?.full_name || user?.email || 'User'}</p>
-              <p className="text-[10px] text-[#A0A0A0] capitalize">{user?.role || 'user'}</p>
+              <p className="text-xs font-medium text-white truncate">Trexium</p>
+              <p className="text-[10px] text-[#A0A0A0]">Admin</p>
             </div>
-            <button onClick={() => logout()} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center" title="Sign out">
+            <button onClick={() => { localStorage.removeItem('trexium_auth'); window.location.href = '/login'; }} className="w-8 h-8 rounded-lg bg-[#161620] hover:bg-[#1E1E26] flex items-center justify-center" title="Sign out">
               <LogOut className="w-3.5 h-3.5 text-[#A0A0A0]" />
             </button>
           </div>

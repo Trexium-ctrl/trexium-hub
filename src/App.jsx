@@ -17,17 +17,14 @@ import Payments from './pages/Payments';
 import Files from './pages/Files';
 import Tasks from './pages/Tasks';
 import Settings from './pages/Settings';
+import ActivityLog from './pages/ActivityLog';
 import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { Navigate } from 'react-router-dom';
 
 const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+  const { isLoadingAuth, isLoadingPublicSettings } = useAuth();
 
-  // Show loading spinner while checking app public settings or auth
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
@@ -36,18 +33,9 @@ const AuthenticatedApp = () => {
     );
   }
 
-  // Handle authentication errors
-  if (authError && authError.type === 'user_not_registered') {
-    return <UserNotRegisteredError />;
-  }
-
-  // Render the main app
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
@@ -59,6 +47,7 @@ const AuthenticatedApp = () => {
           <Route path="/payments" element={<Payments />} />
           <Route path="/files" element={<Files />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/activity" element={<ActivityLog />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Route>
